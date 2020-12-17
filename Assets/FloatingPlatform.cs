@@ -19,7 +19,7 @@ public class FloatingPlatform : MonoBehaviour
     public float moveSpeed;
     bool moveDown;
 
-    float fixedTime;
+    public float fixedTime;
 
     public AudioSource audioSource;
     public AudioClip audioClip_Shrinking;
@@ -27,7 +27,7 @@ public class FloatingPlatform : MonoBehaviour
 
     void Start()
     {
-        fixedTime = 2.0f;
+        fixedTime = 5.0f;
     }
     // Update is called once per frame
     void Update()
