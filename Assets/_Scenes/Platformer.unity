@@ -3120,10 +3120,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 2960, y: 1440}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -3673,6 +3673,7 @@ MonoBehaviour:
   yPosition01: 0
   yPosition02: -4
   moveSpeed: 1
+  fixedTime: 5
   audioSource: {fileID: 362324947}
   audioClip_Shrinking: {fileID: 8300000, guid: 803aa4a5e2ce06b4e8c7abfa3f13edd9, type: 3}
   audioClip_BackToOriginal: {fileID: 8300000, guid: 7463c9a11ef9e934f97426998f817815, type: 3}
@@ -3901,7 +3902,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &458303506
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21045,6 +21046,7 @@ MonoBehaviour:
   yPosition01: 3.88
   yPosition02: 0
   moveSpeed: 1
+  fixedTime: 5
   audioSource: {fileID: 1634681016}
   audioClip_Shrinking: {fileID: 8300000, guid: 803aa4a5e2ce06b4e8c7abfa3f13edd9, type: 3}
   audioClip_BackToOriginal: {fileID: 8300000, guid: 7463c9a11ef9e934f97426998f817815, type: 3}
@@ -22387,6 +22389,7 @@ MonoBehaviour:
   yPosition01: 0
   yPosition02: -4
   moveSpeed: 1
+  fixedTime: 5
   audioSource: {fileID: 1867839153}
   audioClip_Shrinking: {fileID: 8300000, guid: 803aa4a5e2ce06b4e8c7abfa3f13edd9, type: 3}
   audioClip_BackToOriginal: {fileID: 8300000, guid: 7463c9a11ef9e934f97426998f817815, type: 3}
@@ -24533,6 +24536,7 @@ MonoBehaviour:
   yPosition01: 6
   yPosition02: 3.5
   moveSpeed: 1
+  fixedTime: 5
   audioSource: {fileID: 2136295917}
   audioClip_Shrinking: {fileID: 8300000, guid: 803aa4a5e2ce06b4e8c7abfa3f13edd9, type: 3}
   audioClip_BackToOriginal: {fileID: 8300000, guid: 7463c9a11ef9e934f97426998f817815, type: 3}

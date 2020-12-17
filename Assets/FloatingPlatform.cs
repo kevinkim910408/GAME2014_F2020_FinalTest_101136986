@@ -14,29 +14,36 @@ using UnityEngine;
 
 public class FloatingPlatform : MonoBehaviour
 {
+    #region Variables
+    [Header("Floating Positions")]
     public float yPosition01;
     public float yPosition02;
     public float moveSpeed;
     bool moveDown;
 
-    public float fixedTime;
+    [Header("Floating Time")]
+    public float fixedTime = 2.0f;
 
+    [Header("Sounds")]
     public AudioSource audioSource;
     public AudioClip audioClip_Shrinking;
     public AudioClip audioClip_BackToOriginal;
 
+    #endregion
     void Start()
     {
-        fixedTime = 5.0f;
+
     }
     // Update is called once per frame
     void Update()
     {
+        // set boolean according to the y positions
         if (transform.position.y > yPosition01)
             moveDown = true;
         if (transform.position.y < yPosition02)
             moveDown = false;
 
+        // actual moving platforms 
         if (moveDown)
             transform.position = new Vector2(transform.position.x, transform.position.y - moveSpeed * Time.deltaTime);
         else
@@ -45,7 +52,6 @@ public class FloatingPlatform : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        //When collided with player, set active true
         if (collision.gameObject.CompareTag("Player"))
         {
             StopAllCoroutines();
@@ -53,7 +59,7 @@ public class FloatingPlatform : MonoBehaviour
             //Start shrink
             StartCoroutine(ShrinkCoroutine());
 
-            //Play SFX
+            //Play Sound
             audioSource.clip = audioClip_Shrinking;
             audioSource.Play();
         }
@@ -61,15 +67,14 @@ public class FloatingPlatform : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        //When player leave, set active false
         if (collision.gameObject.CompareTag("Player"))
         {
             StopAllCoroutines();
 
             //Start go back to original size
-            StartCoroutine(BackToOriginSizeCoroutine());
+            StartCoroutine(BackToOriginalCoroutine());
 
-            //Play SFX
+            //Play Sound
             audioSource.clip = audioClip_BackToOriginal;
             audioSource.Play();
 
@@ -81,6 +86,7 @@ public class FloatingPlatform : MonoBehaviour
         float shirinkingTime = 0.0f;
         Vector3 platformVector = transform.localScale;
 
+        // until shiriktime is over fixed time.
         while (shirinkingTime < fixedTime)
         {
             shirinkingTime += Time.deltaTime;
@@ -94,11 +100,12 @@ public class FloatingPlatform : MonoBehaviour
         transform.localScale = new Vector3(0.0f, 0.0f,0.0f);
     }
 
-    IEnumerator BackToOriginSizeCoroutine()
+    IEnumerator BackToOriginalCoroutine()
     {
         float shirinkingTime = 0;
         Vector3 platformVector = transform.localScale;
 
+        // until shiriktime is over fixed time.
         while (shirinkingTime < fixedTime)
         {
             shirinkingTime += Time.deltaTime;
