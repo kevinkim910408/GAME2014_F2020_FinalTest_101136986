@@ -9,6 +9,7 @@ using UnityEngine;
 ///Date last modified : December 17, 2020
 ///Program description : To control floating platforms
 ///Revision history : December 17, 2020 : Added the functions of moving up and down 
+///                                       Added the functions of shirinking the size and back to original size 
 /// </summary>
 
 public class FloatingPlatform : MonoBehaviour
@@ -18,6 +19,12 @@ public class FloatingPlatform : MonoBehaviour
     public float moveSpeed;
     bool moveDown;
 
+    float fixedTime;
+
+    void Start()
+    {
+        fixedTime = 2.0f;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -31,4 +38,67 @@ public class FloatingPlatform : MonoBehaviour
         else
             transform.position = new Vector2(transform.position.x, transform.position.y + moveSpeed * Time.deltaTime);
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        //When collided with player, set active true
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            StopAllCoroutines();
+
+            //Start shrink
+            StartCoroutine(ShrinkCoroutine());
+
+        }
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        //When player leave, set active false
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            StopAllCoroutines();
+
+            //Start go back to original size
+            StartCoroutine(BackToOriginSizeCoroutine());
+
+        }
+    }
+
+    IEnumerator ShrinkCoroutine()
+    {
+        float shirinkingTime = 0.0f;
+        Vector3 platformVector = transform.localScale;
+
+        while (shirinkingTime < fixedTime)
+        {
+            shirinkingTime += Time.deltaTime;
+            platformVector.x = Mathf.Lerp(platformVector.x, 0.0f, shirinkingTime / fixedTime);
+            transform.localScale = new Vector2(platformVector.x, platformVector.y);
+
+            yield return null;
+        }
+
+        // make disappear
+        transform.localScale = new Vector3(0.0f, 0.0f,0.0f);
+    }
+
+    IEnumerator BackToOriginSizeCoroutine()
+    {
+        float shirinkingTime = 0;
+        Vector3 platformVector = transform.localScale;
+
+        while (shirinkingTime < fixedTime)
+        {
+            shirinkingTime += Time.deltaTime;
+            platformVector.x = Mathf.Lerp(platformVector.x, 1.0f, shirinkingTime / fixedTime);
+            transform.localScale = new Vector2(platformVector.x, platformVector.y);
+
+            yield return null;
+        }
+
+        // back to original size
+        transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+    }
+
 }
