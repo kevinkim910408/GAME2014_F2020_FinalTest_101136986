@@ -21,6 +21,10 @@ public class FloatingPlatform : MonoBehaviour
 
     float fixedTime;
 
+    public AudioSource audioSource;
+    public AudioClip audioClip_Shrinking;
+    public AudioClip audioClip_BackToOriginal;
+
     void Start()
     {
         fixedTime = 2.0f;
@@ -49,6 +53,9 @@ public class FloatingPlatform : MonoBehaviour
             //Start shrink
             StartCoroutine(ShrinkCoroutine());
 
+            //Play SFX
+            audioSource.clip = audioClip_Shrinking;
+            audioSource.Play();
         }
     }
 
@@ -61,6 +68,10 @@ public class FloatingPlatform : MonoBehaviour
 
             //Start go back to original size
             StartCoroutine(BackToOriginSizeCoroutine());
+
+            //Play SFX
+            audioSource.clip = audioClip_BackToOriginal;
+            audioSource.Play();
 
         }
     }
